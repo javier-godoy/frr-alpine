@@ -5,7 +5,7 @@ RUN apk --no-cache add git openssh
 RUN git clone https://github.com/frrouting/frr.git frr
 
 RUN cd frr && \
-    git checkout origin/stable/7.5 && \
+    git checkout origin/stable/7.5 -b local && \
     source alpine/APKBUILD.in apk && apk add --no-cache --update-cache $makedepends && \
     pip install pytest && \
     ./bootstrap.sh && \
