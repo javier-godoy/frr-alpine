@@ -1,7 +1,8 @@
 FROM alpine:3.13
 
-RUN apk --no-cache add git openssh && \
-    git clone https://github.com/frrouting/frr.git frr
+RUN apk --no-cache add git openssh 
+
+RUN git clone https://github.com/frrouting/frr.git frr
 
 RUN cd frr && \
     git checkout origin/stable/7.5 && \
