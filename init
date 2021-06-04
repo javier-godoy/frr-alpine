@@ -1,0 +1,9 @@
+#!/bin/sh
+set -v
+chown -R frr:frr /etc/frr 
+/usr/lib/frr/zebra -v 
+/usr/lib/frr/zebra &
+/usr/lib/frr/ospfd &
+sleep 1
+ps aux
+tail -f /dev/null

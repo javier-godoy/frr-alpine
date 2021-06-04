@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  testfrr:
+    cap_add:
+     - NET_ADMIN
+     #- CAP_SYS_ADMIN
+    build: . 
+    restart: "no"
+    volumes:
+     - ./frr:/etc/frr
