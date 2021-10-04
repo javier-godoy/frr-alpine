@@ -6,11 +6,9 @@ RUN apk --no-cache add git openssh
 #Shared C build chain
 RUN apk --no-cache add autoconf make automake gcc libc-dev
 
-
-RUN git clone https://github.com/frrouting/frr.git frr
+RUN git clone --progress --verbose --single-branch --branch stable/7.5 https://github.com/frrouting/frr.git frr
 
 RUN cd frr && \
-    git checkout origin/stable/7.5 -b local && \
     source alpine/APKBUILD.in apk && apk add --no-cache --update-cache $makedepends && \
     pip install pytest && \
     ./bootstrap.sh && \
