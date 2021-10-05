@@ -6,9 +6,20 @@ RUN apk --no-cache add git openssh
 #Shared C build chain
 RUN apk --no-cache add autoconf make automake gcc libc-dev
 
-RUN git clone --progress --verbose --single-branch --branch stable/7.5 https://github.com/frrouting/frr.git frr
+RUN git clone  --progress --verbose --single-branch --branch v2.0.0 https://github.com/CESNET/libyang.git
+
+RUN apk --no-cache add pcre2-dev cmake bsd-compat-headers&& \
+    cd libyang && \
+    mkdir build; cd build &&\
+    cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr -D CMAKE_BUILD_TYPE:String="Release" .. && \
+    make --jobs=8 && \
+    make install && \
+    cd /
+
+RUN git clone --progress --verbose --single-branch --branch stable/8.0 https://github.com/frrouting/frr.git frr
 
 RUN cd frr && \
+    export PKG_CONFIG_PATH=/usr/lib64/pkgconfig && \
     source alpine/APKBUILD.in apk && apk add --no-cache --update-cache $makedepends && \
     pip install pytest && \
     ./bootstrap.sh && \
