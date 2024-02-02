@@ -1,4 +1,4 @@
-TAG = jgodoy/frr\:latest
+TAG = jgodoy/frr\:8.0
 
 .PHONY: build
 
