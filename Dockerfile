@@ -1,4 +1,7 @@
-FROM alpine:3.13
+ARG ALPINE_TAG
+FROM alpine:${ALPINE_TAG}
+
+ARG FRR_TAG
 
 #git and OpenSSH
 RUN apk --no-cache add git openssh
@@ -16,7 +19,7 @@ RUN apk --no-cache add pcre2-dev cmake bsd-compat-headers&& \
     make install && \
     cd /
 
-RUN git clone --progress --verbose --single-branch --branch stable/8.0 https://github.com/frrouting/frr.git frr
+RUN git clone --progress --verbose --single-branch --branch frr-${FRR_TAG} https://github.com/frrouting/frr.git frr
 
 RUN cd frr && \
     export PKG_CONFIG_PATH=/usr/lib64/pkgconfig && \
