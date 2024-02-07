@@ -1,5 +1,5 @@
-ALPINE_TAG=3.13
-FRR_TAG=8.0
+ALPINE_TAG=3.19.1
+PIP_ARGS=--break-system-packages
 
 TAG = jgodoy/frr\:$(FRR_TAG)-alpine-$(ALPINE_TAG)
 
@@ -9,6 +9,7 @@ TAG = jgodoy/frr\:$(FRR_TAG)-alpine-$(ALPINE_TAG)
 build:
 	docker build . -t $(TAG) \
 		--build-arg ALPINE_TAG=$(ALPINE_TAG) \
-		--build-arg FRR_TAG=$(FRR_TAG)
+		--build-arg FRR_TAG=$(FRR_TAG) \
+		--build-arg PIP_ARGS=$(PIP_ARGS)
 
 install: build

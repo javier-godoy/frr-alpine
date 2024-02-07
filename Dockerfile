@@ -2,6 +2,7 @@ ARG ALPINE_TAG
 FROM alpine:${ALPINE_TAG}
 
 ARG FRR_TAG
+ARG PIP_ARGS=
 
 #git and OpenSSH
 RUN apk --no-cache add git openssh
@@ -24,7 +25,7 @@ RUN git clone --progress --verbose --single-branch --branch frr-${FRR_TAG} https
 RUN cd frr && \
     export PKG_CONFIG_PATH=/usr/lib64/pkgconfig && \
     source alpine/APKBUILD.in apk && apk add --no-cache --update-cache $makedepends && \
-    pip install pytest && \
+    pip install pytest ${PIP_ARGS} && \
     ./bootstrap.sh && \
     ./configure \
 --enable-static --enable-static-bin --enable-shared \
