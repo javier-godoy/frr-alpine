@@ -1,4 +1,5 @@
 ALPINE_TAG=3.19.1
+FRR_TAG=9.1
 PIP_ARGS=--break-system-packages
 
 TAG = jgodoy/frr\:$(FRR_TAG)-alpine-$(ALPINE_TAG)
